@@ -1,77 +1,98 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Player - 5 Video</title>
-<style>
-body { background:#000; color:#fff; font-family:Arial,sans-serif; text-align:center; margin:0; padding:20px; }
-button { margin:5px; padding:10px 16px; font-size:15px; cursor:pointer; background:#333; color:#fff; border:none; border-radius:6px; }
-button:hover { background:#555; }
-.player-wrapper { position:relative; max-width:800px; margin:20px auto; background:#000; }
-video { width:100%; height:auto; display:none; background:#000; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Video Galerisi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 40px 20px;
+        }
 
-/* Spinner */
-.spinner { width:60px; height:60px; border:6px solid #333; border-top:6px solid #e50914; border-radius:50%; animation:spin 1s linear infinite; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
-@keyframes spin { from { transform:translate(-50%,-50%) rotate(0deg);} to { transform:translate(-50%,-50%) rotate(360deg);} }
-</style>
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #03dac6;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.1em;
+            text-align: center;
+            color: #e0e0e0;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+            background-color: #000;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Videolar</h2>
+    <h1>🎬 Seçilmiş Videolar</h1>
 
-<!-- 5 Video Butonu -->
-<button onclick="loadVideo(1)">Video 1</button>
-<button onclick="loadVideo(2)">Video 2</button>
-<button onclick="loadVideo(3)">Video 3</button>
-<button onclick="loadVideo(4)">Video 4</button>
-<button onclick="loadVideo(5)">Video 5</button>
+    <div class="video-container">
+        
+        <div class="video-card">
+            <h3>Video 1</h3>
+            <video controls controlslist="nodownload" oncontextmenu="return false;">
+                <source src="/v1" type="video/mp4">
+            </video>
+        </div>
 
-<div class="player-wrapper">
-  <div class="spinner" id="spinner"></div>
-  <video id="player" controls playsinline preload="metadata">
-    Tarayıcın video oynatmayı desteklemiyor.
-  </video>
-</div>
+        <div class="video-card">
+            <h3>Video 2</h3>
+            <video controls controlslist="nodownload" oncontextmenu="return false;">
+                <source src="/v2" type="video/mp4">
+            </video>
+        </div>
 
-<script>
-// 🔹 Direkt / izinli video linkleri
-const videos = {
-  1: "https://v.cdnservice.cloud/dVAf426jYd-Le-pE7QKUOw==,1775593952/bobs-tuber/v1cdn/2549000/2549552/2549552mp4720_.mp4",
-  2: "https://n.cdnservice.cloud/f9jrdBSbnCWP1B7ipqCk_g==,1775594627/bobs-tuber/n1cdn/490000/490586/490586mp4720_.mp4",
-  3: "https://n.cdnservice.cloud/PxEy95-_aneMyfX33D4z0Q==,1775594876/bobs-tuber/n1cdn/3370000/3370256/3370256mp4720_.mp4",
-  4: "https://krasporno2.cdnhdx.com/files/ot_pervogo_lica/7b1b19d7d1d32db7b380fbd519a6b8db08xhop_360p.mp4",
-  5: "https://krasporno22a.cdnhdx.com/files/ot_pervogo_lica/2d48729fd416f516ac5d02c463e0747dzph_360p.mp4"
-};
+        <div class="video-card">
+            <h3>Video 3</h3>
+            <video controls controlslist="nodownload" oncontextmenu="return false;">
+                <source src="/v3" type="video/mp4">
+            </video>
+        </div>
 
-const player  = document.getElementById("player");
-const spinner = document.getElementById("spinner");
+        <div class="video-card">
+            <h3>Video 4</h3>
+            <video controls controlslist="nodownload" oncontextmenu="return false;">
+                <source src="/v4" type="video/mp4">
+            </video>
+        </div>
 
-// Video yükleme fonksiyonu
-function loadVideo(id) {
-  spinner.style.display = "block";
-  player.style.display = "none";
+        <div class="video-card">
+            <h3>Video 5</h3>
+            <video controls controlslist="nodownload" oncontextmenu="return false;">
+                <source src="/v5" type="video/mp4">
+            </video>
+        </div>
 
-  player.src = videos[id];
-  player.load();
-}
-
-// Video hazır olunca spinner gizle
-player.addEventListener("loadedmetadata", () => {
-  spinner.style.display = "none";
-  player.style.display = "block";
-  player.play();
-});
-
-// Hata olursa uyarı
-player.addEventListener("error", () => {
-  spinner.style.display = "none";
-  alert("Video yüklenemedi.");
-});
-
-// Sayfa açıldığında 1. video otomatik yüklenir
-loadVideo(1);
-</script>
+    </div>
 
 </body>
 </html>
