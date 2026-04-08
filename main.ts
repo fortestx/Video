@@ -5,7 +5,7 @@ Deno.serve(async (req) => {
   const videoLinks: Record<string, string> = {
     "/v1": "https://mp4-cdn77.xvideos-cdn.com/df7ec181-89f4-48b2-93ef-d56ea0167a97/0/video_360p.mp4",
     "/v2": "https://t.me/keyzporn/1498",
-    "/v3": "https://ornek-site.com/video3.mp4",
+    "/v3": "https://pornomobi.xyz/public/video/files/videohub/Lyubitelskiy-utrenniy-seks-po-sobachi.mp4",
     "/v4": "https://ornek-site.com/video4.mp4",
     "/v5": "https://ornek-site.com/video5.mp4",
   };
