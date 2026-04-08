@@ -1,0 +1,21 @@
+name: Video Otomasyon Botu
+on:
+  repository_dispatch:
+    types: [start_upload]
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Videoyu Yasaklı Siteden Çek
+        run: curl -L "${{ github.event.client_payload.video_url }}" -o video_temp.mp4
+
+      - name: GitLab'a API ile Gönder
+        run: |
+          # Dosyayı GitLab API üzerinden 'upload' yerine direkt 'commit' ile gönderiyoruz
+          curl --request POST \
+            --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
+            --form "branch=main" \
+            --form "content=<video_temp.mp4" \
+            --form "commit_message=Otomatik Yukleme: ${{ github.event.client_payload.file_name }}" \
+            "https://gitlab.com/api/v4/projects/79410127/repository/files/${{ github.event.client_payload.file_name }}"
