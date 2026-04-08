@@ -2,97 +2,21 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videolar</title>
+    <title>Video Paneli</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 40px 20px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #03dac6;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .video-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .video-card {
-            background-color: #1e1e1e;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-        }
-
-        .video-card h3 {
-            margin: 0 0 15px 0;
-            font-size: 1.1em;
-            text-align: center;
-            color: #e0e0e0;
-        }
-
-        video {
-            width: 100%;
-            border-radius: 8px;
-            background-color: #000;
-            outline: none;
-        }
+        body { background: #000; color: #fff; font-family: sans-serif; text-align: center; padding: 50px; }
+        .btn { display: inline-block; padding: 15px 30px; margin: 10px; background: #333; color: #03dac6; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .btn:hover { background: #444; }
     </style>
 </head>
 <body>
-
     <h1>🎬 Videolar</h1>
-
-    <div class="video-container">
-        
-        <div class="video-card">
-            <h3>Video 1</h3>
-            <video controls controlslist="nodownload" oncontextmenu="return false;">
-                <source src="/v1" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="video-card">
-            <h3>Video 2</h3>
-            <video controls controlslist="nodownload" oncontextmenu="return false;">
-                <source src="/v2" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="video-card">
-            <h3>Video 3</h3>
-            <video controls controlslist="nodownload" oncontextmenu="return false;">
-                <source src="/v3" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="video-card">
-            <h3>Video 4</h3>
-            <video controls controlslist="nodownload" oncontextmenu="return false;">
-                <source src="/v4" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="video-card">
-            <h3>Video 5</h3>
-            <video controls controlslist="nodownload" oncontextmenu="return false;">
-                <source src="/v5" type="video/mp4">
-            </video>
-        </div>
-
+    <div id="menu">
+        <a href="/v1" class="btn">Video 1'i İzle</a>
+        <a href="/v2" class="btn">Video 2'yi İzle</a>
+        <a href="/v3" class="btn">Video 3'ü İzle</a>
+        <a href="/v4" class="btn">Video 4'ü İzle</a>
+        <a href="/v5" class="btn">Video 5'i İzle</a>
     </div>
-
 </body>
 </html>
