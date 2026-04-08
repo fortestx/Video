@@ -3,41 +3,55 @@ Deno.serve(async (req) => {
 
   // --- VİDEO LİNKLERİNİ BURAYA GİR ---
   const videoLinks: Record<string, string> = {
-    "/v1": "https://mp4-cdn77.xvideos-cdn.com/df7ec181-89f4-48b2-93ef-d56ea0167a97/0/video_360p.mp4",
-    "/v2": "https://t.me/keyzporn/1498",
-    "/v3": "https://pornomobi.xyz/public/video/files/videohub/Lyubitelskiy-utrenniy-seks-po-sobachi.mp4",
+    "/v1": "https://pornomobi.xyz/public/video/files/videohub/Lyubitelskiy-utrenniy-seks-po-sobachi.mp4",
+    "/v2": "https://ornek-site.com/video2.mp4",
+    "/v3": "https://ornek-site.com/video3.mp4",
     "/v4": "https://ornek-site.com/video4.mp4",
     "/v5": "https://ornek-site.com/video5.mp4",
   };
 
-  // Eğer gelen istek bir video yolu ise (/v1, /v2 vb.) Proxy devreye girer
   if (videoLinks[url.pathname]) {
     const targetUrl = videoLinks[url.pathname];
     
     try {
-      const response = await fetch(targetUrl);
+      // 1. Tarayıcıdan gelen "ileriye sarma" (Range) isteğini yakala
+      const rangeHeader = req.headers.get("range");
+
+      // 2. Bu isteği asıl video sitesine (yasaklı siteye) aynen ilet
+      const fetchOptions: RequestInit = {};
+      if (rangeHeader) {
+        fetchOptions.headers = { "Range": rangeHeader };
+      }
+
+      // Asıl siteden videoyu veya istenen parçayı çek
+      const response = await fetch(targetUrl, fetchOptions);
       
-      // Videoyu tarayıcıya engelsiz olarak aktar
+      // 3. Karşı taraftan gelen video başlıklarını al (Dosya boyutu vb.)
+      const responseHeaders = new Headers(response.headers);
+      
+      // Güvenlik ve oynatma izinlerini ayarla
+      responseHeaders.set("Access-Control-Allow-Origin", "*");
+      responseHeaders.set("Accept-Ranges", "bytes"); // Tarayıcıya "Evet, ileri sarabilirsin" diyoruz
+
+      // 4. Videonun o anki parçasını tarayıcıya gönder
       return new Response(response.body, {
-        status: response.status,
-        headers: {
-          "Content-Type": "video/mp4",
-          "Access-Control-Allow-Origin": "*",
-          "Cache-Control": "public, max-age=3600"
-        },
+        status: response.status, // 200 (Tamamı) veya 206 (Parçalı) kodunu aynen ilet
+        statusText: response.statusText,
+        headers: responseHeaders,
       });
+
     } catch (error) {
       return new Response("Video çekilirken bir hata oluştu.", { status: 500 });
     }
   }
 
-  // Eğer istek ana sayfaya geldiyse index.html dosyasını göster
+  // Ana sayfa (index.html) sunumu
   try {
     const html = await Deno.readTextFile("./index.html");
     return new Response(html, {
       headers: { "Content-Type": "text/html; charset=UTF-8" },
     });
   } catch {
-    return new Response("index.html dosyasi bulunamadi. Lutfen ayni klasorde oldugundan emin olun.", { status: 404 });
+    return new Response("index.html dosyasi bulunamadi.", { status: 404 });
   }
 });
