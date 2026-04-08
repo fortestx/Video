@@ -4,10 +4,10 @@ Deno.serve(async (req) => {
   // --- VİDEO LİNKLERİNİ BURAYA GİR ---
   const videoLinks: Record<string, string> = {
     "/v1": "https://pornomobi.xyz/public/video/files/videohub/Lyubitelskiy-utrenniy-seks-po-sobachi.mp4",
-    "/v2": "https://ornek-site.com/video2.mp4",
-    "/v3": "https://ornek-site.com/video3.mp4",
-    "/v4": "https://ornek-site.com/video4.mp4",
-    "/v5": "https://ornek-site.com/video5.mp4",
+    "/v2": "https://pornomobi.xyz/public/video/files/videohub/Eta-suchka-vse-potekla-ot-anala---BelleNiko.mp4",
+    "/v3": "https://pornomobi.xyz/public/video/files/videohub/STEP-SISTER-STAYED-ALONE-WITH-STEP-BROTHER-AND-THIS-HAPPENED.mp4",
+    "/v4": "https://pornomobi.xyz/public/video/files/videohub/Nevinnaya-21-letnyaya-devushka-prosit-boleznennogo-analnogo-ziyaniya-ispolzovannogo-i-shiroko-rastyanutogo-Eddi-Dendzherom-v-video-ot-pervogo-litsa.mp4",
+    "/v5": "https://pornomobi.xyz/public/video/files/videohub/Tolstushka-nasladilas-oralnym-seksom-so-svoim-parnem.mp4",
   };
 
   if (videoLinks[url.pathname]) {
